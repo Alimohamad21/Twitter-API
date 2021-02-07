@@ -22,10 +22,8 @@ class Stats:
         self.counted_stats = False
 
     def count_average_retweets_and_likes(self):
-        if self.total_tweets == 0:
-            return 0
-        if self.counted_stats:
-            return self.average_retweets
+        if self.total_tweets == 0 or self.counted_stats:
+            return
         for tweet in self.user_timeline:
             self.total_rts += tweet.retweet_count
             self.total_likes += tweet.favorite_count
@@ -58,8 +56,10 @@ print(f"\n\nTop 3 average likes in {user}'s followers: ")
 for i in range(3):
     print(f'{i+1}-')
     users[i].print_stats()
+print(f'\n\n{user} average likes rank among their followers:{users.index(s)+1}')
 users.sort(key=lambda x: x.average_retweets, reverse=True)
 print(f"\n\nTop 3 average rts in {user}'s followers: ")
 for i in range(3):
     print(f'{i+1}-')
     users[i].print_stats()
+print(f'\n\n{user} average rts rank among their followers:{users.index(s)+1}')
